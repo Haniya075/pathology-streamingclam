@@ -7,8 +7,8 @@ import pandas as pd
 from pathlib import Path
 from torch.nn.functional import softmax
 from typing import Any, Optional, Sequence
-from lightning.pytorch.callbacks import BasePredictionWriter
-from lightning.pytorch.callbacks import Callback
+from pytorch_lightning.callbacks import BasePredictionWriter
+from pytorch_lightning.callbacks import Callback
 
 
 class AttentionWriter(BasePredictionWriter):
