@@ -6,8 +6,6 @@ import pandas as pd
 
 from streamingclam.data.sampler import weighted_sampler
 from streamingclam.data.dataset import StreamingClassificationDataset
-from streamingclam.data.attention_dataset import AttentionDataset
-
 
 class StreamingCLAMDataModule(L.LightningDataModule):
     def __init__(
@@ -115,22 +113,6 @@ class StreamingCLAMDataModule(L.LightningDataModule):
             )
         if stage == "predict":
             pass
-
-        if stage == "attention":
-            self.att_df = pd.read_csv(self.att_csv_path)
-            self.stage = stage
-            self.attention_dataset = AttentionDataset(
-                self.image_dir,
-                image_df=self.att_df,
-                tile_size=self.tile_size,
-                img_size=self.image_size,
-                read_level=self.level,
-                mask_dir=self.tissue_mask_dir,
-                mask_suffix=self.mask_suffix,
-                variable_input_shapes=self.variable_input_shapes,
-                tile_stride=self.tile_stride,
-                network_output_stride=self.network_output_stride,
-                filetype=self.filetype)
 
     def train_dataloader(self):
         return DataLoader(
