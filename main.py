@@ -160,7 +160,7 @@ def configure_datamodule(options):
         val_csv_path=options.val_csv,
         test_csv_path=options.test_csv,
         attention_csv_path=options.attention_csv,
-        a=options.mask_path,
+        #a=options.mask_path,
         mask_suffix=options.mask_suffix,
         image_size=options.image_size,
         variable_input_shapes=options.variable_input_shapes,
