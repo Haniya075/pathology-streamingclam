@@ -53,7 +53,7 @@ class CLAMConfig:
                 n_classes=self.n_classes,
                 instance_loss_fn=self.instance_loss_fn(),
                 subtyping=self.subtyping,
-                additive=self.additive,
+                #additive=self.additive,
             )
         elif self.branch == "mb":
             print("Loading CLAM with multiple branches \n")
