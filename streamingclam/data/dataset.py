@@ -219,7 +219,7 @@ if __name__ == "__main__":
         mask_suffix="_tissue",
         variable_input_shapes=False,
         tile_stride=680,
-        filetype=".tif",
+        filetype=".png",
         read_level=5,
     )
 
