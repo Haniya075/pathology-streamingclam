@@ -206,7 +206,7 @@ if __name__ == "__main__":
         )
 
         trainer = configure_trainer(options, wandb_logger)
-        wandb disabled
+        wandb.init(mode="disabled")
         # log gradients, parameter histogram and model topology
         if trainer.global_rank == 0:
             print("at rank 0, logging wandb config")
