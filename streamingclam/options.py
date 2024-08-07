@@ -28,7 +28,7 @@ class TrainConfig:
     ckp_path: str = ""  # the name fo the ckp file within the default_save_dir, otherwise last.ckpt will be used (if present)
     resume: bool = True  # Whether to resume training from the last/best epoch
     grad_batches: int = 2  # Gradient accumulation: the amount of batches before optimizer step
-    num_gpus: int = 4
+    num_gpus: int = 2
     precision: str = "32"
 
     # StreamingClam options
