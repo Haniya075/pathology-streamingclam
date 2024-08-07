@@ -119,7 +119,7 @@ class StreamingCLAM(ImageNetClassifier):
             network = StreamingCLAM.model_choices[encoder](weights="IMAGENET1K_V1")
             stream_net, _ = split_resnet(network)
 
-        head = CLAMConfig(encoder=encoder, branch=branch, n_classes=n_classes, additive=additive).configure_clam()
+        head = CLAMConfig(encoder=encoder, branch=branch, n_classes=n_classes).configure_clam()
 
         # At the end of the ResNet model, reduce the spatial dimensions with additional pooling layers
         self._get_streaming_options(**kwargs)
