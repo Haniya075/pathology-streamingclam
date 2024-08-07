@@ -35,7 +35,7 @@ class StreamingClassificationDataset(Dataset):
         variable_input_shapes: bool = False,
         tile_stride: int | None = None,
         network_output_stride: int = 1,
-        filetype=".tif",
+        filetype=".png",
     ):
         self.img_dir = Path(img_dir)
         self.filetype = filetype
@@ -93,7 +93,7 @@ class StreamingClassificationDataset(Dataset):
         img_fname = self.classification_frame.iloc[idx, 0]
         label = self.classification_frame.iloc[idx, 1]
 
-        img_path = self.img_dir / Path(img_fname).with_suffix(self.filetype)
+        img_path = self.img_dir / Path(img_fname[:12]).with_suffix(self.filetype)
 
         if self.mask_dir:
             mask_path = self.mask_dir / Path(img_fname + self.mask_suffix).with_suffix(self.filetype)
