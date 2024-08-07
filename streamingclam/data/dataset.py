@@ -76,8 +76,10 @@ class StreamingClassificationDataset(Dataset):
             # Files can be just images, but also image, mask
             for file in images:
                 if not file.exists():
-                    print(f"WARNING {file} not found, excluded both image and mask (if present)!")
+                    #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
                     continue
+                else:
+                    print("FIle Found Name : ",file)
 
             included["images"].append(images[0])
             included["labels"].append(label)
