@@ -62,7 +62,7 @@ class StreamingClassificationDataset(Dataset):
         self.random_crop = A.RandomCrop(self.img_size, self.img_size, p=1.0)
         if not self.img_dir.exists():
             raise FileNotFoundError(f"Directory {self.img_dir} not found or doesn't exist")
-        print("SELF.IMAGEDIRR ": ,self.img_dir)
+        print("SELF.IMAGEDIRR : ",self.img_dir)
         self.check_csv()
 
         self.labels = self.data_paths["labels"]
