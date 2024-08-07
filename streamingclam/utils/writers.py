@@ -56,10 +56,10 @@ class AttentionWriter(BasePredictionWriter):
 
         # Pyvips has weird problems if number of bands is not equal to 1 or 3.
         for band in range(num_branches):
-            out_file_mask = self.output_dir / Path(batch["image_name"] + f"_attention_{band}").with_suffix(".tif")
+            out_file_mask = self.output_dir / Path(batch["image_name"] + f"_attention_{band}").with_suffix(".png")
             attention.write_to_file(out_file_mask, pyramid=True, compression="jpeg", tile=True)
 
-        out_file = self.output_dir / Path(batch["image_name"]).with_suffix(".tif")
+        out_file = self.output_dir / Path(batch["image_name"]).with_suffix(".png")
         image = pyvips.Image.new_from_array(batch["image"][0, ...].permute(1, 2, 0))
         image.write_to_file(out_file, pyramid=True, compression="jpeg", tile=True)
 
