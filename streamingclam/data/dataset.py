@@ -203,9 +203,9 @@ class StreamingClassificationDataset(Dataset):
 
 if __name__ == "__main__":
     root = Path("/data/pathology/projects/pathology-bigpicture-streamingclam")
-    data_path = root / Path("data/breast/camelyon_packed_0.25mpp_tif/images")
-    mask_path = root / Path("data/breast/camelyon_packed_0.25mpp_tif/images_tissue_masks")
-    csv_file = root / Path("streaming_experiments/camelyon/data_splits/train_0.csv")
+    data_path = '/kaggle/input/croppedd/new_cropped_images-Copy'
+    #mask_path = root / Path("data/breast/camelyon_packed_0.25mpp_tif/images_tissue_masks")
+    csv_file ='/kaggle/input/datasetcsv/dataset.csv'
 
     dataset = StreamingClassificationDataset(
         img_dir=str(data_path),
