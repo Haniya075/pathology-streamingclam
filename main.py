@@ -1,6 +1,6 @@
 import os
 
-os.environ["WANDB_DIR"] = "/home/stephandooper"
+os.environ["WANDB_DIR"] = "/kaggle/working/pathology-streamingclam"
 os.environ["VIPS_CONCURRENCY"] = "30"
 os.environ["OMP_NUM_THREADS"] = "4"
 import pyvips
@@ -202,7 +202,7 @@ if __name__ == "__main__":
         wandb_logger = WandbLogger(
             name=options.experiment_name,
             project=options.wandb_project_name,
-            save_dir="/home/stephandooper",
+            save_dir="/kaggle/working/pathology-streamingclam",
         )
 
         trainer = configure_trainer(options, wandb_logger)
