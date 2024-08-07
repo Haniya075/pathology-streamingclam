@@ -27,7 +27,7 @@ class StreamingCLAMDataModule(L.LightningDataModule):
         num_workers: int = 2,
         transform: A.BaseCompose | None = None,
         verbose: bool = True,
-        filetype: str = ".tif",
+        filetype: str = ".png",
         output_dir: Path | str | None = None
     ):
         super().__init__()
@@ -57,7 +57,7 @@ class StreamingCLAMDataModule(L.LightningDataModule):
 
     def filter_written_files(self):
         """ Filters out any attention images in att_csv that are already written to output_dir"""
-        attention_files_written = self.output_dir.rglob("*.tif")
+        attention_files_written = self.output_dir.rglob("*.png")
 
 
 
