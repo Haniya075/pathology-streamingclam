@@ -1,4 +1,4 @@
-import lightning as L
+import pytorch_lightning as L
 import albumentationsxl as A
 from torch.utils.data import DataLoader
 from pathlib import Path
