@@ -144,15 +144,17 @@ class StreamingClassificationDataset(Dataset):
 
     def __getitem__(self, idx):
         sample, label, img_fname = self.get_img_pairs(idx)
+        image_np = images["image"]
+        image_height, image_width = image_np.shape[:2]
 
         if self.transform:
             sample = self.transform(**sample)
 
-        pad_to_tile_size = sample["image"].width < self.tile_size or sample["image"].height < self.tile_size
+        pad_to_tile_size = image_width < self.tile_size or image_height < self.tile_size
         resize_op = self.get_resize_op(pad_to_tile_size=pad_to_tile_size)
         sample = resize_op(**sample)
 
-        if sample["image"].width * sample["image"].height > self.img_size**2:
+        if image_width * image_height > self.img_size**2:
             sample = self.random_crop(**sample)
 
         if "mask" in sample.keys():
