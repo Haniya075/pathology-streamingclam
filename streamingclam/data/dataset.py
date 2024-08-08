@@ -140,7 +140,7 @@ class StreamingClassificationDataset(Dataset):
         #)
         #images["mask"] = mask_np
 
-    return images, label, img_fname
+        return images, label, img_fname
 
     def __getitem__(self, idx):
         sample, label, img_fname = self.get_img_pairs(idx)
