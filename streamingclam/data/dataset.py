@@ -73,6 +73,7 @@ class StreamingClassificationDataset(Dataset):
         included = {"images": [], "masks": [], "labels": []} if self.mask_dir else {"images": [], "labels": []}
         for i in range(len(self)):
             images, label = self.get_img_path(i)  #
+            print("IMAGES : ",images)
             
             # Files can be just images, but also image, mask
             for file in images:
