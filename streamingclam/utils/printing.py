@@ -1,4 +1,4 @@
-from pytorch_lightning.callbacks import Callback
+from lightning.pytorch.callbacks import Callback
 from pprint import pprint
 
 class PrintingCallback(Callback):
