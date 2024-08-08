@@ -99,7 +99,7 @@ class StreamingClassificationDataset(Dataset):
         label = self.classification_frame.iloc[idx, 1]
 
         img_path = self.img_dir / Path(img_fname[:12]).with_suffix(self.filetype)
-        print("IMAGE PATH : ",img_path)
+        #print("IMAGE PATH : ",img_path)
 
         if self.mask_dir:
             mask_path = self.mask_dir / Path(img_fname + self.mask_suffix).with_suffix(self.filetype)
@@ -110,7 +110,9 @@ class StreamingClassificationDataset(Dataset):
     def get_img_pairs(self, idx):
         images = {"image": None}
 
-        img_fname = str(self.data_paths["images"][idx])
+        img_fname = str(self.data_paths["images"][idx])[:12]
+        print("new : ",img_fname)
+        
         label = int(self.data_paths["labels"][idx])
         image = pyvips.Image.new_from_file(img_fname[:12], page=self.read_level)
         images["image"] = image
@@ -163,7 +165,7 @@ class StreamingClassificationDataset(Dataset):
         return sample
 
     def __len__(self):
-        print("LENGTH: ",len(self.classification_frame))
+        #print("LENGTH: ",len(self.classification_frame))
         return len(self.classification_frame)
 
     def get_resize_op(self, pad_to_tile_size=False):
