@@ -58,6 +58,7 @@ class StreamingClassificationDataset(Dataset):
 
         # Will be populated in check_csv function
         self.data_paths = {"images": [], "masks": [], "labels": []}
+        print("self.data_paths: ",self.data_paths)
 
         self.random_crop = A.RandomCrop(self.img_size, self.img_size, p=1.0)
         if not self.img_dir.exists():
@@ -111,7 +112,7 @@ class StreamingClassificationDataset(Dataset):
         images = {"image": None}
 
         img_fname = str(self.data_paths["images"][idx])[:12]
-        print("new : ",img_fname)
+        #print("new : ",img_fname)
         
         label = int(self.data_paths["labels"][idx])
         image = pyvips.Image.new_from_file(img_fname[:12], page=self.read_level)
