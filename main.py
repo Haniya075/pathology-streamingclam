@@ -197,6 +197,7 @@ if __name__ == "__main__":
         options.network_output_stride = max(network_output_stride * options.pooling_kernel, network_output_stride)
     dm = configure_datamodule(options)
     dm.setup(stage=options.mode)
+    os.environ["WANDB_MODE"] = "disabled"
 
     if options.mode == "fit":
         wandb_logger = WandbLogger(
