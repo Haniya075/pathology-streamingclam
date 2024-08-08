@@ -66,16 +66,19 @@ class StreamingClassificationDataset(Dataset):
         """Check if entries in csv file exist"""
 
         included = {"images": [], "masks": [], "labels": []} if self.mask_dir else {"images": [], "labels": []}
+        
+        existing_files = {f.stem[:12]: f for f in self.img_dir.glob(f"*{self.filetype}")}
+        
         for i in range(len(self)):
             images, label = self.get_img_path(i)
             # Files can be just images, but also image, mask
-            matching_files = [f for f in images if f[:12] == image]
-            #for file in images:
-            if not matching_files:
-                #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
-                continue
-            else:
-                print("File Found Name : ", file)
+            for file in images:
+                file_key = file.stem[:12]
+                if file_key not in existing_files:
+                    print(f"WARNING {file} not found, excluded both image and mask (if present)!")
+                    continue
+                else:
+                    print("File Found Name : ", existing_files[file_key])
 
             included["images"].append(images[0])
             included["labels"].append(label)
@@ -86,11 +89,10 @@ class StreamingClassificationDataset(Dataset):
         self.data_paths = included
 
     def get_img_path(self, idx):
-        img_fname = self.classification_frame.iloc[idx, 0][:12]
-        print("IMAGEEEEEEEEEE ",img_fname)
+        img_fname = self.classification_frame.iloc[idx, 0]
         label = self.classification_frame.iloc[idx, 1]
 
-        img_path = self.img_dir / Path(img_fname[:12])
+        img_path = self.img_dir / Path(img_fname[:12]).with_suffix(self.filetype)
 
         if self.mask_dir:
             mask_path = self.mask_dir / Path(img_fname[:12] + self.mask_suffix).with_suffix(self.filetype)
@@ -101,9 +103,9 @@ class StreamingClassificationDataset(Dataset):
     def get_img_pairs(self, idx):
         images = {"image": None}
 
-        img_fname = str(self.data_paths["images"][idx])[:12]
+        img_fname = str(self.data_paths["images"][idx])
         label = int(self.data_paths["labels"][idx])
-        image = pyvips.Image.new_from_file(img_fname[:12], page=self.read_level)
+        image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
         images["image"] = image
 
         if self.mask_dir:
@@ -190,7 +192,7 @@ class StreamingClassificationDataset(Dataset):
 if __name__ == "__main__":
     root = Path("/data/pathology/projects/pathology-bigpicture-streamingclam")
     data_path = '/kaggle/input/croppedd/new_cropped_images-Copy'
-    #mask_path = root / Path("data/breast/camelyon_packed_0.25mpp_tif/images_tissue_masks")
+    mask_path = root / Path("data/breast/camelyon_packed_0.25mpp_tif/images_tissue_masks")
     csv_file = '/kaggle/input/datasetcsv/dataset.csv'
 
     dataset = StreamingClassificationDataset(
