@@ -75,7 +75,7 @@ class StreamingClassificationDataset(Dataset):
             for file in images:
                 file_key = file.stem[:12]
                 if file_key not in existing_files:
-                    print(f"WARNING {file} not found, excluded both image and mask (if present)!")
+                    #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
                     continue
                 else:
                     print("File Found Name : ", existing_files[file_key])
