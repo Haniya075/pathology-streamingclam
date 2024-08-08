@@ -72,13 +72,13 @@ class StreamingClassificationDataset(Dataset):
         for i in range(len(self)):
             images, label = self.get_img_path(i)
             # Files can be just images, but also image, mask
-            for file in images:
-                file_key = file.stem[:12]
-                if file_key not in existing_files:
-                    #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
-                    continue
-                else:
-                    print("FILEEEEEEEEEEEEE : ",file)
+        for file in images:
+            file_key = file.stem[:12]
+            if file_key not in existing_files:
+                #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
+                continue
+            else:
+                print("FILEEEEEEEEEEEEE : ",file)
 
             included["images"].append(images[0])
             included["labels"].append(label)
