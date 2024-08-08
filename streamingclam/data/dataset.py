@@ -102,6 +102,7 @@ class StreamingClassificationDataset(Dataset):
         images = {"image": None}
 
         img_fname = str(self.data_paths["images"][idx])
+        print("get_img_pairs: ",img_fname)
         label = int(self.data_paths["labels"][idx])
         image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
         images["image"] = image
