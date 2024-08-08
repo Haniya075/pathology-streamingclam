@@ -89,7 +89,7 @@ class StreamingClassificationDataset(Dataset):
         print("IMAGEEEEEEEEEE ",img_fname)
         label = self.classification_frame.iloc[idx, 1]
 
-        img_path = self.img_dir / Path(img_fname[:12]))
+        img_path = self.img_dir / Path(img_fname[:12])
 
         if self.mask_dir:
             mask_path = self.mask_dir / Path(img_fname[:12] + self.mask_suffix).with_suffix(self.filetype)
