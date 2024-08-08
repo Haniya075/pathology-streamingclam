@@ -125,7 +125,7 @@ class StreamingClassificationDataset(Dataset):
 
     def __getitem__(self, idx):
         sample, label, img_fname[:12] = self.get_img_pairs(idx)
-        print("Image Fname : ",img_fname,"******")
+        #print("Image Fname : ",img_fname,"******")
 
         if self.transform:
             sample = self.transform(**sample)
@@ -163,6 +163,7 @@ class StreamingClassificationDataset(Dataset):
         return sample
 
     def __len__(self):
+        print("LENGTH: ",len(self.classification_frame))
         return len(self.classification_frame)
 
     def get_resize_op(self, pad_to_tile_size=False):
