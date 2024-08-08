@@ -86,7 +86,7 @@ class StreamingClassificationDataset(Dataset):
 
             included["images"].append(images[0])
             included["labels"].append(label)
-            print("INCLUDED : ",included)
+            #print("INCLUDED : ",included)
 
             if self.mask_dir:
                 included["masks"].append(images[1])
