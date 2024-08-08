@@ -13,9 +13,9 @@ import warnings
 
 from pathlib import Path
 
-import lightning.pytorch as pl
-from lightning.pytorch.callbacks import ModelCheckpoint
-from lightning.pytorch.loggers import WandbLogger
+import pytorch_lightning as pl
+from pytorch_lightning.callbacks import ModelCheckpoint
+from pytorch_lightning.loggers import WandbLogger
 
 from streamingclam.options import TrainConfig
 from streamingclam.utils.memory_format import MemoryFormat
