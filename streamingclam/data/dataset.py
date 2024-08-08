@@ -58,7 +58,6 @@ class StreamingClassificationDataset(Dataset):
 
         # Will be populated in check_csv function
         self.data_paths = {"images": [], "masks": [], "labels": []}
-        print("self.data_paths: ",self.data_paths)
 
         self.random_crop = A.RandomCrop(self.img_size, self.img_size, p=1.0)
         if not self.img_dir.exists():
@@ -75,7 +74,6 @@ class StreamingClassificationDataset(Dataset):
         for i in range(len(self)):
             images, label = self.get_img_path(i)  #
             #print("IMAGES : ",images)
-            
             # Files can be just images, but also image, mask
             for file in images:
                 if not file.exists():
@@ -109,6 +107,7 @@ class StreamingClassificationDataset(Dataset):
         return [img_path], label
 
     def get_img_pairs(self, idx):
+        print("Works : ")
         images = {"image": None}
 
         img_fname = str(self.data_paths["images"][idx])[:12]
@@ -127,6 +126,7 @@ class StreamingClassificationDataset(Dataset):
         return images, label, img_fname
 
     def __getitem__(self, idx):
+        print("Works")
         sample, label, img_fname[:12] = self.get_img_pairs(idx)
         #print("Image Fname : ",img_fname,"******")
 
