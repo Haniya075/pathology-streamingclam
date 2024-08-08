@@ -102,43 +102,43 @@ class StreamingClassificationDataset(Dataset):
         return [img_path], label
 
     def get_img_pairs(self, idx):
-    images = {"image": None}
+        images = {"image": None}
 
-    img_fname = str(self.data_paths["images"][idx])
-    print("get_img_pairs: ", img_fname)
-    label = int(self.data_paths["labels"][idx])
-    print("LABEL: ", label)
+        img_fname = str(self.data_paths["images"][idx])
+        print("get_img_pairs: ", img_fname)
+        label = int(self.data_paths["labels"][idx])
+        print("LABEL: ", label)
     
-    # Load image
-    if img_fname.lower().endswith('.png'):
-        image = pyvips.Image.new_from_file(img_fname)
-    else:
-        image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
+        # Load image
+        if img_fname.lower().endswith('.png'):
+            image = pyvips.Image.new_from_file(img_fname)
+        else:
+            image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
     
-    # Convert pyvips image to NumPy array
-    image_np = np.ndarray(
-        buffer=image.write_to_memory(),
-        dtype=np.uint8,
-        shape=(image.height, image.width, image.bands)
-    )
-    images["image"] = image_np
+        # Convert pyvips image to NumPy array
+        image_np = np.ndarray(
+            buffer=image.write_to_memory(),
+            dtype=np.uint8,
+            shape=(image.height, image.width, image.bands)
+        )
+        images["image"] = image_np
     
     # Handle masks if present
-    if self.mask_dir:
-        mask_fname = str(self.data_paths["masks"][idx])
-        mask = pyvips.Image.new_from_file(mask_fname)
-        ratio = image.width / mask.width
+    #if self.mask_dir:
+        #mask_fname = str(self.data_paths["masks"][idx])
+        #mask = pyvips.Image.new_from_file(mask_fname)
+        #ratio = image.width / mask.width
         
         # Resize mask to match the image size
-        mask_resized = mask.resize(ratio, kernel="nearest")
+        #mask_resized = mask.resize(ratio, kernel="nearest")
         
         # Convert mask to NumPy array
-        mask_np = np.ndarray(
-            buffer=mask_resized.write_to_memory(),
-            dtype=np.uint8,
-            shape=(mask_resized.height, mask_resized.width, mask_resized.bands)
-        )
-        images["mask"] = mask_np
+        #mask_np = np.ndarray(
+            #buffer=mask_resized.write_to_memory(),
+            #dtype=np.uint8,
+            #shape=(mask_resized.height, mask_resized.width, mask_resized.bands)
+        #)
+        #images["mask"] = mask_np
 
     return images, label, img_fname
 
