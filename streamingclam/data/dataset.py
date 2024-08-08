@@ -144,7 +144,7 @@ class StreamingClassificationDataset(Dataset):
 
     def __getitem__(self, idx):
         sample, label, img_fname = self.get_img_pairs(idx)
-        image_np = images["image"]
+        image_np = sample["image"]
         image_height, image_width = image_np.shape[:2]
 
         if self.transform:
