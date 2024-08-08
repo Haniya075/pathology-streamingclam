@@ -61,7 +61,7 @@ class StreamingClassificationDataset(Dataset):
         self.check_csv()
 
         self.labels = self.data_paths["labels"]
-        print("SELF.DATAPATHS: ", self.data_paths)
+        #print("SELF.DATAPATHS: ", self.data_paths)
 
     def check_csv(self):
         """Check if entries in csv file exist"""
