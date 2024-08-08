@@ -107,7 +107,11 @@ class StreamingClassificationDataset(Dataset):
         img_fname = str(self.data_paths["images"][idx])
         print("get_img_pairs: ",img_fname)
         label = int(self.data_paths["labels"][idx])
-        image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
+        print("LABEL: ",label)
+        if img_fname.lower().endswith('.png'):
+            image = pyvips.Image.new_from_file(img_fname)
+        else:
+            image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
         images["image"] = image
 
         if self.mask_dir:
