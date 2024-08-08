@@ -68,6 +68,7 @@ class StreamingClassificationDataset(Dataset):
         included = {"images": [], "masks": [], "labels": []} if self.mask_dir else {"images": [], "labels": []}
         
         existing_files = {f.stem[:12]: f for f in self.img_dir.glob(f"*{self.filetype}")}
+        print("EXISTING FILES : ",existing_files,"************")
         
         for i in range(len(self)):
             images, label = self.get_img_path(i)
