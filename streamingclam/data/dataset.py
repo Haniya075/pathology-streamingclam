@@ -101,7 +101,7 @@ class StreamingClassificationDataset(Dataset):
 
         return [img_path], label
 
-def get_img_pairs(self, idx):
+    def get_img_pairs(self, idx):
     images = {"image": None}
 
     img_fname = str(self.data_paths["images"][idx])
