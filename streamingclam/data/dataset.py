@@ -82,8 +82,8 @@ class StreamingClassificationDataset(Dataset):
                 else:
                     print("FILEEEEEEEEEEEEE : ",file)
 
-            included["images"].append(images[0])
-            included["labels"].append(label)
+        included["images"].append(images[0])
+        included["labels"].append(label)
 
             if self.mask_dir:
                 included["masks"].append(images[1])
