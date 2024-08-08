@@ -69,12 +69,13 @@ class StreamingClassificationDataset(Dataset):
         for i in range(len(self)):
             images, label = self.get_img_path(i)
             # Files can be just images, but also image, mask
-            for file in images:
-                if not file.exists():
-                    print(f"WARNING {file} not found, excluded both image and mask (if present)!")
-                    continue
-                else:
-                    print("File Found Name : ", file)
+            matching_files = [f for f in images if f[:12] == image]
+            #for file in images:
+            if not matching_files:
+                #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
+                continue
+            else:
+                print("File Found Name : ", file)
 
             included["images"].append(images[0])
             included["labels"].append(label)
