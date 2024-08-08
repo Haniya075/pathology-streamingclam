@@ -61,6 +61,7 @@ class StreamingClassificationDataset(Dataset):
         self.check_csv()
 
         self.labels = self.data_paths["labels"]
+        print("SELF.DATAPATHS: ", self.data_paths)
 
     def check_csv(self):
         """Check if entries in csv file exist"""
@@ -68,7 +69,7 @@ class StreamingClassificationDataset(Dataset):
         included = {"images": [], "masks": [], "labels": []} if self.mask_dir else {"images": [], "labels": []}
         
         existing_files = {f.stem[:12]: f for f in self.img_dir.glob(f"*{self.filetype}")}
-        print("EXISTING FILES : ",existing_files,"************")
+        #print("EXISTING FILES : ",existing_files,"************")
         
         for i in range(len(self)):
             images, label = self.get_img_path(i)
