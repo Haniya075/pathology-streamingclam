@@ -80,7 +80,7 @@ class StreamingClassificationDataset(Dataset):
                     #print(f"WARNING {file} not found, excluded both image and mask (if present)!")
                     continue
                 else:
-                    included["images"].append(images[0])
+                    included["images"].append(existing_files[file_key])
                     included["labels"].append(label)
                     #print("FILEEEEEEEEEEEEE : ",file)
 
