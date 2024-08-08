@@ -110,7 +110,7 @@ class StreamingClassificationDataset(Dataset):
 
         img_fname = str(self.data_paths["images"][idx])
         label = int(self.data_paths["labels"][idx])
-        image = pyvips.Image.new_from_file(img_fname, page=self.read_level)
+        image = pyvips.Image.new_from_file(img_fname[:12], page=self.read_level)
         images["image"] = image
 
         if self.mask_dir:
@@ -122,7 +122,7 @@ class StreamingClassificationDataset(Dataset):
         return images, label, img_fname
 
     def __getitem__(self, idx):
-        sample, label, img_fname = self.get_img_pairs(idx)
+        sample, label, img_fname[:12] = self.get_img_pairs(idx)
 
         if self.transform:
             sample = self.transform(**sample)
@@ -156,7 +156,7 @@ class StreamingClassificationDataset(Dataset):
             sample["mask"] = sample["mask"] >= 1
 
         sample["label"] = torch.tensor(label)
-        sample["image_name"] = Path(img_fname).stem
+        sample["image_name"] = Path(img_fname[:12]).stem
         return sample
 
     def __len__(self):
