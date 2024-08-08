@@ -73,7 +73,7 @@ class StreamingClassificationDataset(Dataset):
         included = {"images": [], "masks": [], "labels": []} if self.mask_dir else {"images": [], "labels": []}
         for i in range(len(self)):
             images, label = self.get_img_path(i)  #
-            print("IMAGES : ",images)
+            #print("IMAGES : ",images)
             
             # Files can be just images, but also image, mask
             for file in images:
@@ -99,6 +99,7 @@ class StreamingClassificationDataset(Dataset):
         label = self.classification_frame.iloc[idx, 1]
 
         img_path = self.img_dir / Path(img_fname[:12]).with_suffix(self.filetype)
+        print("IMAGE PATH : ",img_path)
 
         if self.mask_dir:
             mask_path = self.mask_dir / Path(img_fname + self.mask_suffix).with_suffix(self.filetype)
