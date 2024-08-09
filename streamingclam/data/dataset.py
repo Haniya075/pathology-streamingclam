@@ -149,7 +149,7 @@ class StreamingClassificationDataset(Dataset):
         image_height, image_width = image_np.shape[:2]
 
         # Convert numpy image to PIL Image if required
-        print("Type before : ",type(image))
+        #print("Type before : ",type(image))
         if isinstance(image, np.ndarray):
             image = Image.fromarray(image)
             
