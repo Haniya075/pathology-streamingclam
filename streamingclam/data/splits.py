@@ -168,7 +168,11 @@ class StreamingCLAMDataModule(L.LightningDataModule):
         batch : {image: image, mask: mask}, label, fname
         batch : {image: image}, label, fname
         """
-
+        print("Type of batch['image_name']:", type(batch.get("image_name")))
+        print("Type of batch['label']:", type(batch.get("label")))
+        print("Type of batch['fname']:", type(batch.get("fname")))
+        print("Type of device:", type(device))
+        
         batch["image_name"] = batch["image_name"][0]
         # Always put mask to gpu
         if "mask" in batch.keys():
