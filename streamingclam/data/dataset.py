@@ -1,6 +1,7 @@
 import pyvips
 import torch
 import math
+from PIL import Image
 
 import pandas as pd
 import numpy as np
