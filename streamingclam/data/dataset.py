@@ -180,7 +180,6 @@ class StreamingClassificationDataset(Dataset):
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         print("Tensor made ")
         print("SAMPLE : ",sample)
-        sample["image"] = Image.fromarray(sample["image"])
         sample = to_tensor(**sample)
         print("Workss ")
 
