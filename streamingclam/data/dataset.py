@@ -147,6 +147,10 @@ class StreamingClassificationDataset(Dataset):
         image_np = sample["image"]
         image_height, image_width = image_np.shape[:2]
 
+        # Convert numpy image to PIL Image if required
+        if isinstance(sample["image"], np.ndarray):
+            sample["image"] = Image.fromarray(sample["image"])
+
         if self.transform:
             sample = self.transform(**sample)
 
@@ -164,9 +168,9 @@ class StreamingClassificationDataset(Dataset):
             new_width = math.ceil(sample["mask"].width / self.network_output_stride)
             hscale = new_width / sample["mask"].width
 
-            sample["mask"] = sample["mask"].resize(hscale, vscale=vscale, kernel="nearest")
+            sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], is_check_shapes=False)
+        to_tensor = A.Compose([A.ToTensorV2(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         sample = to_tensor(**sample)
 
         if "mask" in sample.keys():
