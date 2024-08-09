@@ -149,12 +149,15 @@ class StreamingClassificationDataset(Dataset):
         image_height, image_width = image_np.shape[:2]
 
         # Convert numpy image to PIL Image if required
-        if isinstance(sample["image"], Image.Image):
-            sample["image"] = Image.fromarray(sample["image"])
+        print("Type before : ",type(image))
+        if isinstance(image, np.ndarray):
+            image = Image.fromarray(image)
+            
         #sample["image"] = Image.fromarray(sample["image"])
 
         if self.transform:
             sample = self.transform(**sample)
+        print("Workss: ")
 
         pad_to_tile_size = image_width < self.tile_size or image_height < self.tile_size
         #resize_op = self.get_resize_op(pad_to_tile_size=pad_to_tile_size)
@@ -172,14 +175,14 @@ class StreamingClassificationDataset(Dataset):
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
-        sample = to_tensor(**sample)
+        #to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
+        #sample = to_tensor(**sample)
 
         #if "mask" in sample.keys():
             #sample["mask"] = sample["mask"] >= 1
 
-        sample["label"] = torch.tensor(label)
-        sample["image_name"] = Path(img_fname).stem
+        #sample["label"] = torch.tensor(label)
+        #sample["image_name"] = Path(img_fname).stem
         return sample
 
     def __len__(self):
