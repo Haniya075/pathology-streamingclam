@@ -1,5 +1,5 @@
 import lightning as L
-import albumentationsxl  as A
+import albumentationsxl as A
 from torch.utils.data import DataLoader
 from pathlib import Path
 import pandas as pd
