@@ -150,8 +150,8 @@ class StreamingClassificationDataset(Dataset):
 
         # Convert numpy image to PIL Image if required
         #print("Type before : ",type(image))
-        if isinstance(image, np.ndarray):
-            image = Image.fromarray(image)
+        if isinstance(image_np, np.ndarray):
+            image = Image.fromarray(image_np)
             
         #sample["image"] = Image.fromarray(sample["image"])
 
