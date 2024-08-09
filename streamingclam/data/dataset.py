@@ -155,7 +155,7 @@ class StreamingClassificationDataset(Dataset):
             
         if self.transform:
             sample = self.transform(**sample)
-        print("Workss: ")
+        
 
         pad_to_tile_size = image_width < self.tile_size or image_height < self.tile_size
         #resize_op = self.get_resize_op(pad_to_tile_size=pad_to_tile_size)
@@ -177,6 +177,7 @@ class StreamingClassificationDataset(Dataset):
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         sample = to_tensor(**sample)
+        print("Workss: ")
 
         #if "mask" in sample.keys():
             #sample["mask"] = sample["mask"] >= 1
