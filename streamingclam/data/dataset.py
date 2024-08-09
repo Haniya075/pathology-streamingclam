@@ -175,14 +175,14 @@ class StreamingClassificationDataset(Dataset):
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        #to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
-        #sample = to_tensor(**sample)
+        to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
+        sample = to_tensor(**sample)
 
         #if "mask" in sample.keys():
             #sample["mask"] = sample["mask"] >= 1
 
-        #sample["label"] = torch.tensor(label)
-        #sample["image_name"] = Path(img_fname).stem
+        sample["label"] = torch.tensor(label)
+        sample["image_name"] = Path(img_fname).stem
         return sample
 
     def __len__(self):
