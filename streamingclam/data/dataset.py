@@ -174,15 +174,15 @@ class StreamingClassificationDataset(Dataset):
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        sample["image"] = Image.fromarray(sample["image"])
+        # sample["image"] = Image.fromarray(sample["image"])
         print("TYPE before Tensor :  ",sample)
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         print("Tensor made ")
         print("SAMPLE : ",sample)
-        #if not isinstance(sample['image'], np.ndarray):
-            #sample['image'] = Image.fromarray(sample['image'])
-        sample = to_tensor(**sample)
+        if not isinstance(sample['image'], np.ndarray):
+            sample['image'] = Image.fromarray(sample['image'])
+        # sample = to_tensor(**sample)
         print("Workss ")
 
         #if "mask" in sample.keys():
