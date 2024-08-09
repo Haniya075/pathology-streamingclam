@@ -1,5 +1,5 @@
 import lightning as L
-import albumentationsxl as A
+import albumentationsxl  as A
 from torch.utils.data import DataLoader
 from pathlib import Path
 import pandas as pd
@@ -25,7 +25,7 @@ class StreamingCLAMDataModule(L.LightningDataModule):
         variable_input_shapes: bool = True,
         copy_to_gpu: bool = False,
         num_workers: int = 2,
-        transform: A.BaseCompose | None = None,
+        #transform: A.BaseCompose | None = None,
         verbose: bool = True,
         filetype: str = ".png",
         output_dir: Path | str | None = None
