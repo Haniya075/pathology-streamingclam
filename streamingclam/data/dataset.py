@@ -150,7 +150,7 @@ class StreamingClassificationDataset(Dataset):
 
         # Convert numpy image to PIL Image if required
         if isinstance(sample["image"], Image.Image):
-            sample["image"] = np.array(sample["image"])
+            sample["image"] = Image.fromarray(sample["image"])
         #sample["image"] = Image.fromarray(sample["image"])
 
         if self.transform:
@@ -163,20 +163,20 @@ class StreamingClassificationDataset(Dataset):
         #if image_width * image_height > self.img_size**2:
             #sample = self.random_crop(**sample)
 
-        if "mask" in sample.keys():
-            new_height = math.ceil(sample["mask"].height / self.network_output_stride)
-            vscale = new_height / sample["mask"].height
+        #if "mask" in sample.keys():
+            #new_height = math.ceil(sample["mask"].height / self.network_output_stride)
+            #vscale = new_height / sample["mask"].height
 
-            new_width = math.ceil(sample["mask"].width / self.network_output_stride)
-            hscale = new_width / sample["mask"].width
+            #new_width = math.ceil(sample["mask"].width / self.network_output_stride)
+            #hscale = new_width / sample["mask"].width
 
-            sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
+            #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         sample = to_tensor(**sample)
 
-        if "mask" in sample.keys():
-            sample["mask"] = sample["mask"] >= 1
+        #if "mask" in sample.keys():
+            #sample["mask"] = sample["mask"] >= 1
 
         sample["label"] = torch.tensor(label)
         sample["image_name"] = Path(img_fname).stem
