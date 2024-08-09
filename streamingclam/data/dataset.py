@@ -157,11 +157,11 @@ class StreamingClassificationDataset(Dataset):
             sample = self.transform(**sample)
 
         pad_to_tile_size = image_width < self.tile_size or image_height < self.tile_size
-        resize_op = self.get_resize_op(pad_to_tile_size=pad_to_tile_size)
-        sample = resize_op(**sample)
+        #resize_op = self.get_resize_op(pad_to_tile_size=pad_to_tile_size)
+        #sample = resize_op(**sample)
 
-        if image_width * image_height > self.img_size**2:
-            sample = self.random_crop(**sample)
+        #if image_width * image_height > self.img_size**2:
+            #sample = self.random_crop(**sample)
 
         if "mask" in sample.keys():
             new_height = math.ceil(sample["mask"].height / self.network_output_stride)
