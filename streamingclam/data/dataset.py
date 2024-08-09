@@ -181,7 +181,7 @@ class StreamingClassificationDataset(Dataset):
         print("Tensor made ")
         print("SAMPLE : ",sample)
         if not isinstance(sample['image'], np.ndarray):
-            sample['image'] = np.array(sample['image'])
+            sample['image'] = Image.fromarray(sample['image'])
         sample = to_tensor(**sample)
         print("Workss ")
 
