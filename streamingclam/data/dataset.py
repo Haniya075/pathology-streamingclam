@@ -173,7 +173,7 @@ class StreamingClassificationDataset(Dataset):
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        sample["image"] = Image.fromarray(sample["image"])
+        #sample["image"] = Image.fromarray(sample["image"])
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         sample = to_tensor(**sample)
