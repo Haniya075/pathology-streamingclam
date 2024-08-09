@@ -153,8 +153,6 @@ class StreamingClassificationDataset(Dataset):
         if isinstance(image_np, np.ndarray):
             image = Image.fromarray(image_np)
             
-        #sample["image"] = Image.fromarray(sample["image"])
-
         if self.transform:
             sample = self.transform(**sample)
         print("Workss: ")
@@ -174,6 +172,8 @@ class StreamingClassificationDataset(Dataset):
             #hscale = new_width / sample["mask"].width
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
+
+        sample["image"] = Image.fromarray(sample["image"])
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
         sample = to_tensor(**sample)
