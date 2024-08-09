@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from torch.utils.data import Dataset
-import albumentations as A
+import albumentationsxl as A
 
 augmentations = A.Compose(
     [
