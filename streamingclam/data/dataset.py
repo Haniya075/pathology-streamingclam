@@ -149,12 +149,13 @@ class StreamingClassificationDataset(Dataset):
         image_height, image_width = image_np.shape[:2]
 
         # Convert numpy image to PIL Image if required
-        #print("Type before : ",type(image))
+        print("Type before : ",type(image_np))
         if isinstance(image_np, np.ndarray):
             image = Image.fromarray(image_np)
             
         if self.transform:
             sample = self.transform(**sample)
+        print("Type before : ",type(sample))
         
 
         pad_to_tile_size = image_width < self.tile_size or image_height < self.tile_size
@@ -173,11 +174,13 @@ class StreamingClassificationDataset(Dataset):
 
             #sample["mask"] = sample["mask"].resize((new_width, new_height), resample=Image.NEAREST)
 
-        #sample["image"] = Image.fromarray(sample["image"])
+        sample["image"] = Image.fromarray(sample["image"])
+        print("TYPE before Tensor :  ",sample)
 
         to_tensor = A.Compose([A.ToTensor(transpose_mask=True)], additional_targets={'mask': 'mask'}, is_check_shapes=False)
+        print("Tensor made ")
         sample = to_tensor(**sample)
-        print("Workss: ")
+        print("Workss ")
 
         #if "mask" in sample.keys():
             #sample["mask"] = sample["mask"] >= 1
